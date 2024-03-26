@@ -2,6 +2,7 @@ package exerciseMarch26;
 
 /** The code is modified from the code of Prof. Galles.
  *  Array-based implementation of Stack ADT.
+ *  In this exercise, used for iteratively implementing preorder.
  */
 
 public class ArrayStack implements Stack {
