@@ -24,6 +24,10 @@ public class BinaryTree {
         printPreorder(root);
     }
 
+    public String serializeUsingPreorder() {
+        return serializeUsingPreorder(root);
+    }
+
 
     /** Print a binary tree (inorder) */
     public void printInorder() {
@@ -64,11 +68,25 @@ public class BinaryTree {
         Stack stack = new ArrayStack();
         BinaryTreeNode current = root;
         stack.push(current);
-        while (!stack.empty()) {
+        //while (!stack.empty()) {
             // FILL IN CODE:
 
-        }
+        //}
         System.out.println();
+    }
+
+    /**
+     *
+     * @param root root of the tree
+     * @return a string representing the tree, generated using preorder traversal
+     * and using with / to print null nodes.
+     *
+     */
+    private String serializeUsingPreorder(BinaryTreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        // FILL IN CODE
+
+        return sb.toString();
     }
 
     /**
@@ -154,6 +172,8 @@ public class BinaryTree {
         tree.printInorder();
         System.out.println();
         tree.printPostorder();
+        System.out.println();
+        System.out.println(tree.serializeUsingPreorder());
         System.out.println();
         System.out.println(tree.numNodes());
         System.out.println(tree.height());
