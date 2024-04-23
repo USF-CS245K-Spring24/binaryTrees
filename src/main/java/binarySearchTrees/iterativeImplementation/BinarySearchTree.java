@@ -91,7 +91,7 @@ class BinarySearchTree {
             return; // element not in the tree, nothing to delete
 
         // The root also needs to change if we delete the root
-        if (current.left == null) {
+        if (current.left == null) { // no left child
             if (prev == null) {
                 // removing the root with one right child
                 root = root.right;
@@ -128,7 +128,12 @@ class BinarySearchTree {
             int smallest = rightRoot.data;
             current.data = smallest;
             // Remove smallest
-            prevBeforeRightRoot.left = rightRoot.right;
+
+            if (prevBeforeRightRoot.right == rightRoot) {
+                prevBeforeRightRoot.right  = rightRoot.right;
+            }
+            else
+                prevBeforeRightRoot.left = rightRoot.right;
         }
     }
 
@@ -156,9 +161,10 @@ class BinarySearchTree {
         tree.insert(12);
         tree.insert(16);
         tree.printPreorder();
-        System.out.println(tree.find(12));
-        System.out.println(tree.find(13));
+        //System.out.println(tree.find(12));
+        //System.out.println(tree.find(13));
         System.out.println();
+        tree.delete(10);
         tree.printPreorder();
         System.out.println();
     }

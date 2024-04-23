@@ -1,4 +1,7 @@
-package exerciseMarch26;
+package exerciseMarch26.solution;
+
+import exerciseMarch26.ArrayStack;
+import exerciseMarch26.Stack;
 
 public class BinaryTree {
 
@@ -22,38 +25,39 @@ public class BinaryTree {
     /** Print a binary tree (preorder) */
     public void printPreorder() {
         printPreorder(root);
+        System.out.println();
     }
 
     public String serializeUsingPreorder() {
         return serializeUsingPreorder(root);
     }
 
-
     /** Print a binary tree (inorder) */
     public void printInorder() {
         printInorder(root);
+        System.out.println();
     }
 
     /** Print a binary tree (preorder) */
     public void printPostorder() {
         printPostorder(root);
+        System.out.println();
     }
 
-    /** Return the height of the tree */
+    /** Return the total number of nodes */
+    public int numNodes() {
+        return numNodes(root);
+    }
+
+        /** Return the height of the tree */
     public int height() {return height(root); }
 
     /** Return the number of leaves of the tree */
     public int leaves() {return leaves(root); }
 
-    /** Return the number of nodes in the tree */
-    public int numNodes() {
-        return numNodes(root);
-    }
-
-
-        /**
-         * Print nodes of the binary tree using preorder traversal
-         */
+    /**
+     * Print nodes of the binary tree using preorder traversal
+     */
     private void printPreorder(BinaryTreeNode root) {
         if (root != null) {
             System.out.print(" " + root.data + " ");
@@ -69,8 +73,7 @@ public class BinaryTree {
         BinaryTreeNode current = root;
         stack.push(current);
         while (!stack.empty()) {
-            // FILL IN CODE:
-            BinaryTreeNode node = (BinaryTreeNode)stack.pop();
+            BinaryTreeNode node =  (BinaryTreeNode)stack.pop();
             System.out.print(" " + node.data + " ");
             if (node.right != null)
                 stack.push(node.right);
@@ -79,6 +82,7 @@ public class BinaryTree {
         }
         System.out.println();
     }
+
 
     /**
      *
@@ -90,16 +94,17 @@ public class BinaryTree {
     private String serializeUsingPreorder(BinaryTreeNode root) {
         StringBuilder sb = new StringBuilder();
         // FILL IN CODE
-        if (root == null) {
-            sb.append("/");
-        }
-        else {
-            sb.append(" " + root.data + " ");
+        if (root != null) {
+            sb.append(root.data + " ");
             sb.append(serializeUsingPreorder(root.left));
             sb.append(serializeUsingPreorder(root.right));
         }
+        else
+            sb.append("/");
+
         return sb.toString();
     }
+
 
     /**
      * Print nodes of the binary tree using inorder traversal
@@ -123,28 +128,29 @@ public class BinaryTree {
             printPostorder(root.right);
             System.out.print(" " + root.data + " ");
         }
-
-
     }
 
 
-    /**
-     * Returns the number of levels in the tree
-     * @param root root of the binary tree
-     * @return height (number of levels)
-     */
     private int height(BinaryTreeNode root) {
         // FILL IN CODE:
         // return the height of the tree
-        return 0; // change
+        if (root == null)
+            return 0;
+
+        return 1 + Math.max(height(root.left), height(root.right));
     }
 
     /** Return the number of leaves of the tree */
-    private int leaves(BinaryTreeNode root) {
+    public int leaves(BinaryTreeNode root) {
         // FILL IN CODE
+        if (root == null)
+            return 0;
+        if (root.left == null && root.right == null)
+            return 1;
 
-        return 0;
+        return leaves(root.left) + leaves(root.right);
     }
+
 
     /**
      * Return the number of nodes of the tree
@@ -153,10 +159,11 @@ public class BinaryTree {
      */
     private int numNodes(BinaryTreeNode root) {
         // FILL IN CODE
-
-        return 0;
+        if (root == null)
+            return 0;
+        else
+            return 1 + numNodes(root.left) + numNodes(root.right);
     }
-
 
     public void createSampleTree() {
         // Note: this is not a binary search tree, just a binary tree
@@ -187,15 +194,11 @@ public class BinaryTree {
     public static void main(String[] args) {
         BinaryTree tree = new BinaryTree();
         tree.createSampleTree();
-        //tree.printPreorder();
-        //System.out.println();
-        //tree.printPreorderIterative();
-        //System.out.println();
-        //tree.printInorder();
-        //System.out.println();
-        //tree.printPostorder();
-        //System.out.println();
-        System.out.println(tree.serializeUsingPreorder());
-
+        tree.printPreorder();
+        tree.printInorder();
+        tree.printPostorder();
+        System.out.println(tree.numNodes());
+        System.out.println(tree.height());
+        System.out.println(tree.leaves());
     }
 }
